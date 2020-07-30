@@ -1,0 +1,9 @@
+Flask
+datetime
+uuid
+Flask-SQLAlchemy
+PyJWT
+psycopg2
+flask-bcrypt
+marshmallow
+gunicorn
