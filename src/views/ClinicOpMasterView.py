@@ -10,7 +10,7 @@ clinic_op_schema = ClinicOpMasterSchema()
 common = CommonUtil()
 
 
-@clinic_op_api.route('/add', methods=['POST'])
+@clinic_op_api.route('/web_app/add', methods=['POST'])
 def add():
     """
     Create User Function
@@ -32,7 +32,7 @@ def add():
    #  return common.custom_response({'person_no': token}, 201)
 
 
-@clinic_op_api.route('/update', methods=['PUT'])
+@clinic_op_api.route('/web_app/update', methods=['PUT'])
 def update():
   """
   Update me
@@ -45,7 +45,7 @@ def update():
   ser_op_pat = clinic_op_schema.dump(op_patient)
   return common.custom_response(ser_op_pat, 200)
 
-@clinic_op_api.route('/delete', methods=['PUT'])
+@clinic_op_api.route('/web_app/delete', methods=['PUT'])
 def delete():
   """
   Update me
@@ -58,13 +58,13 @@ def delete():
   return common.custom_response(ser_op_pat, 200)
 
 
-@clinic_op_api.route('/', methods=['GET'])
+@clinic_op_api.route('/web_app/', methods=['GET'])
 def get_all():
     op_patients = ClinicOpMasterModel.get_all_op_patients()
     ser_op_pat = clinic_op_schema.dump(op_patients, many=True)#.data
     return custom_response(ser_op_pat, 200)
 
-@clinic_op_api.route('/<int:op_id>', methods=['GET'])
+@clinic_op_api.route('/web_app/<int:op_id>', methods=['GET'])
 def get_one_op_patient(op_id):
     op_patient = ClinicOpMasterModel.get_op_patient_by_id(op_id)
     if not op_patient:
@@ -72,7 +72,7 @@ def get_one_op_patient(op_id):
     ser_op_pat = clinic_op_schema.dump(op_patient)#.data
     return custom_response(ser_op_pat, 200)
 
-@clinic_op_api.route('/op_patient_list', methods=['GET'])
+@clinic_op_api.route('/web_app/op_patient_list', methods=['GET'])
 def get_op_patient_list():
 
     req_data = request.get_json()

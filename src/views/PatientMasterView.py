@@ -7,7 +7,7 @@ patient_api = Blueprint('patient_api', __name__)
 patient_schema = PatientMasterSchema()
 common = CommonUtil()
 
-@patient_api.route('/add', methods=['POST'])
+@patient_api.route('/web_app/add', methods=['POST'])
 def add():
     try:
         req_data = request.get_json()
@@ -31,7 +31,7 @@ def add():
         #raise
         return common.code_error_response()
 
-@patient_api.route('/update', methods=['PUT'])
+@patient_api.route('/web_app/update', methods=['PUT'])
 def update():
     try:
         req_data = request.get_json()
@@ -45,7 +45,7 @@ def update():
     except:
         return common.code_error_response()
 
-@patient_api.route('/delete', methods=['PUT'])
+@patient_api.route('/web_app/delete', methods=['PUT'])
 def delete():
     try:
         req_data = request.get_json()
@@ -59,7 +59,7 @@ def delete():
     except:
         return common.code_error_response()
 
-@patient_api.route('/', methods=['GET'])
+@patient_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         patients = PatientMasterModel.get_all_patients()
@@ -70,7 +70,7 @@ def get_all():
     except:
         return common.code_error_response()
 
-@patient_api.route('/<int:person_id>', methods=['GET'])
+@patient_api.route('/web_app/<int:person_id>', methods=['GET'])
 def get_one_patient(person_id):
     try:
         patient = PatientMasterModel.get_patient_by_id(person_id)
@@ -81,7 +81,7 @@ def get_one_patient(person_id):
     except:
         return common.code_error_response()
 
-@patient_api.route('/patient_list', methods=['GET'])
+@patient_api.route('/web_app/patient_list', methods=['GET'])
 def get_patient_list():
     try:
         req_data = request.get_json()
@@ -127,7 +127,7 @@ def get_patient_list():
     except:
         return common.code_error_response()
 
-@patient_api.route('/patient_dir', methods=['GET'])
+@patient_api.route('/web_app/patient_dir', methods=['GET'])
 def get_patient_directory():
     try:
         req_data = request.get_json()
@@ -173,12 +173,12 @@ def get_patient_directory():
     except:
         return common.code_error_response()
 
-@patient_api.route('/patient_by_upn', methods=['GET'])
+@patient_api.route('/web_app/patient_by_upn', methods=['GET'])
 def get_patient_by_upn(clinic_id,provider_id,user_type):
     ser_pat = None
     return common.custom_response(ser_pat, 200)
 
-@patient_api.route('/patient_by_phone', methods=['GET'])
+@patient_api.route('/web_app/patient_by_phone', methods=['GET'])
 def get_patient_by_phone(): #clinic_id,provider_id,user_type
     try:
         req_data = request.get_json()

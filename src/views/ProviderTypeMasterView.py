@@ -6,7 +6,7 @@ providerType_api = Blueprint('providerType_api', __name__)
 providerType_schema = ProviderTypeMasterSchema()
 common = CommonUtil()
 
-@providerType_api.route('/', methods=['GET'])
+@providerType_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         streams = ProviderTypeMasterModel.get_all_provider_type()

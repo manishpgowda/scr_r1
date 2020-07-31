@@ -8,7 +8,7 @@ common = CommonUtil()
 
 
 #add a provider
-@provider_api.route('/add', methods=['POST'])
+@provider_api.route('/web_app/add', methods=['POST'])
 def add():
     try:
         req_data = request.get_json()
@@ -33,7 +33,7 @@ def add():
 
 
 #update a provider
-@provider_api.route('/update', methods=['PUT'])
+@provider_api.route('/web_app/update', methods=['PUT'])
 def update():
     try:
         req_data = request.get_json()
@@ -50,7 +50,7 @@ def update():
 
 
 #delete a provider
-@provider_api.route('/delete', methods=['PUT'])
+@provider_api.route('/web_app/delete', methods=['PUT'])
 def delete():
     try:
         req_data = request.get_json()
@@ -65,7 +65,7 @@ def delete():
 
 
 #get all providers
-@provider_api.route('/', methods=['GET'])
+@provider_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         providers = ProviderMasterModel.get_all_providers()
@@ -78,7 +78,7 @@ def get_all():
 
 
 #get one provider
-@provider_api.route('/<int:provider_id>', methods=['GET'])
+@provider_api.route('/web_app/<int:provider_id>', methods=['GET'])
 def get_one_provider(provider_id):
     try:
         provider = ProviderMasterModel.get_provider_by_id(provider_id)
@@ -92,7 +92,7 @@ def get_one_provider(provider_id):
 
 
 #get provider by phone num
-@provider_api.route('/provider_by_phone', methods=['GET'])
+@provider_api.route('/web_app/provider_by_phone', methods=['GET'])
 def get_provider_by_phone():
     try:
         req_data = request.get_json()
@@ -108,7 +108,7 @@ def get_provider_by_phone():
         return common.code_error_response()
 
 #get provider by speciality
-@provider_api.route('/provider_by_speciality', methods=['GET'])
+@provider_api.route('/web_app/provider_by_speciality', methods=['GET'])
 def get_provider_by_speciality():
     try:
         req_data = request.get_json()
@@ -127,7 +127,7 @@ def get_provider_by_speciality():
 
 
 #get provider by speciality using function
-@provider_api.route('/providers_by_spec', methods=['GET'])
+@provider_api.route('/web_app/providers_by_spec', methods=['GET'])
 def get_providers_by_speciality():
     try:
         req_data = request.get_json()
@@ -194,7 +194,7 @@ def get_providers_by_speciality():
         #raise
         return common.code_error_response()
 
-@provider_api.route('/provider_by_clinic', methods=['GET'])
+@provider_api.route('/web_app/provider_by_clinic', methods=['GET'])
 def get_provider_by_clinic():
     try:
         req_data = request.get_json()
@@ -223,7 +223,7 @@ def get_provider_by_clinic():
         raise
         # return common.code_error_response()
 
-@provider_api.route('/book_appointment/provider_list/<int:clinic_id>', methods=['GET'])
+@provider_api.route('/web_app/book_appointment/provider_list/<int:clinic_id>', methods=['GET'])
 def get_provider_list_in_book_new_appointment(clinic_id):
     try:
         provider_list_BA = ProviderMasterModel.load_provider_list_in_book_new_appointment(clinic_id)
@@ -235,7 +235,7 @@ def get_provider_list_in_book_new_appointment(clinic_id):
         # return common.code_error_response()
 
 
-@provider_api.route('/bookmarked_patients/<int:provider_id>', methods=['GET'])
+@provider_api.route('/web_app/bookmarked_patients/<int:provider_id>', methods=['GET'])
 def get_bookmarked_patients_by_provider_id(provider_id):
     try:
         bookmarked_list = ProviderMasterModel.load_bookmarked_patients_by_provider_id(provider_id)
@@ -247,7 +247,7 @@ def get_bookmarked_patients_by_provider_id(provider_id):
         # return common.code_error_response()
 
 
-@provider_api.route('/follow_up_patients/<int:provider_id>', methods=['GET'])
+@provider_api.route('/web_app/follow_up_patients/<int:provider_id>', methods=['GET'])
 def get_follow_up_patients_by_provider_id(provider_id):
     try:
         follow_up_list = ProviderMasterModel.load_follow_up_patients_by_provider_id(provider_id)
@@ -259,7 +259,7 @@ def get_follow_up_patients_by_provider_id(provider_id):
         # return common.code_error_response()
 
 # provider list in web admin in provider section
-@provider_api.route('/Web_admin/provider_list', methods=['GET'])
+@provider_api.route('/web_app/Web_admin/provider_list', methods=['GET'])
 def get_provider_list_web_admin_provider_page():
     try:
         provider_list_web_admin = ProviderMasterModel.load_provider_list_in_web_admin_provider_section()

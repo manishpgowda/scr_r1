@@ -9,7 +9,7 @@ common = CommonUtil()
 
 
 # add clinic staff
-@clinic_staff_api.route('/add', methods=['POST'])
+@clinic_staff_api.route('/web_app/add', methods=['POST'])
 def add():
     try:
         req_data = request.get_json()
@@ -30,7 +30,7 @@ def add():
 
 
 # Update clinic staff
-@clinic_staff_api.route('/update', methods=['PUT'])
+@clinic_staff_api.route('/web_app/update', methods=['PUT'])
 def update():
     try:
         req_data = request.get_json()
@@ -49,7 +49,7 @@ def update():
 
 
 # Delete Clinic Staff
-@clinic_staff_api.route('/delete', methods=['PUT'])
+@clinic_staff_api.route('/web_app/delete', methods=['PUT'])
 def delete():
     try:
         req_data = request.get_json()
@@ -66,7 +66,7 @@ def delete():
 
 
 # Get list of clinic staff
-@clinic_staff_api.route('/', methods=['GET'])
+@clinic_staff_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         clinic_staffs = ClinicStaffMasterModel.get_all_clinic_staff()
@@ -77,7 +77,7 @@ def get_all():
 
 
 # get detail of one clinic staff
-@clinic_staff_api.route('/<int:staff_id>', methods=['GET'])
+@clinic_staff_api.route('/web_app/<int:staff_id>', methods=['GET'])
 def get_one_clinic_staff(staff_id):
     try:
         clinic_staff = ClinicStaffMasterModel.get_clinic_staff_by_id(staff_id)
@@ -90,7 +90,7 @@ def get_one_clinic_staff(staff_id):
 
 
 
-@clinic_staff_api.route('/list_by_clinic', methods=['GET'])
+@clinic_staff_api.route('/web_app/list_by_clinic', methods=['GET'])
 def get_clinic_staff_list():
     try:
         req_data = request.get_json()
@@ -118,7 +118,7 @@ def get_clinic_staff_list():
         return common.code_error_response()
 
 
-@clinic_staff_api.route('/clinic_admin', methods=['GET'])
+@clinic_staff_api.route('/web_app/clinic_admin', methods=['GET'])
 def get_clinic_admin_by_clinic(): #clinic_id,provider_id,user_type
     try:
         req_data = request.get_json()
@@ -148,7 +148,7 @@ def get_clinic_admin_by_clinic(): #clinic_id,provider_id,user_type
 
 
 # front desk list in web admin clinic page on click manage
-@clinic_staff_api.route('/Web_admin/clinics_staff/<int:clinic_id>', methods=['GET'])
+@clinic_staff_api.route('/web_app/Web_admin/clinics_staff/<int:clinic_id>', methods=['GET'])
 def get_list_of_front_desk_in_clinic_by_clinic_id(clinic_id):
     try:
         Staff_list = ClinicStaffMasterModel.load_list_of_front_desk_staff_by_clinic_id_in_admin(clinic_id)

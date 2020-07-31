@@ -7,7 +7,7 @@ medical_store_api = Blueprint('medical_store_api', __name__)
 medical_schema = MedicalStoreSchema()
 common = CommonUtil()
 
-@medical_store_api.route('/add', methods=['POST'])
+@medical_store_api.route('/web_app/add', methods=['POST'])
 def add():
     try:
         req_data = request.get_json()
@@ -23,7 +23,7 @@ def add():
     except:
         return common.code_error_response()
 
-@medical_store_api.route('/update', methods=['PUT'])
+@medical_store_api.route('/web_app/update', methods=['PUT'])
 def update():
     try:
         req_data = request.get_json()
@@ -38,7 +38,7 @@ def update():
     except:
         return common.code_error_response()
 
-@medical_store_api.route('/delete', methods=['PUT'])
+@medical_store_api.route('/web_app/delete', methods=['PUT'])
 def delete():
     try:
         req_data = request.get_json()
@@ -53,7 +53,7 @@ def delete():
     except:
         return common.code_error_response()
 
-@medical_store_api.route('/', methods=['GET'])
+@medical_store_api.route('/web_app/', methods=['GET'])
 def get_all_medicals():
     try:
         medicals = MedicalStoreModel.get_all_medicals()
@@ -63,7 +63,7 @@ def get_all_medicals():
         raise
         return common.code_error_response()
 
-@medical_store_api.route('/<int:medical_store_id>', methods=['GET'])
+@medical_store_api.route('/web_app/<int:medical_store_id>', methods=['GET'])
 def get_medical_by_id(medical_store_id):
     try:
         medical = MedicalStoreModel.get_medical_by_id(medical_store_id)
@@ -74,7 +74,7 @@ def get_medical_by_id(medical_store_id):
     except:
         return common.code_error_response()
 
-@medical_store_api.route('/medical_by_phone', methods=['GET'])
+@medical_store_api.route('/web_app/medical_by_phone', methods=['GET'])
 def get_medical_by_phone():
     try:
         req_data = request.get_json()
@@ -100,7 +100,7 @@ def get_medical_by_phone():
 
 
 #not connected medical store
-@medical_store_api.route('/Web_admin/med_store_list', methods=['GET'])
+@medical_store_api.route('/web_app/Web_admin/med_store_list', methods=['GET'])
 def get_all_medical_stores():
     try:
         req_data = request.get_json()
@@ -148,7 +148,7 @@ def get_all_medical_stores():
         return common.code_error_response()
 
 
-@medical_store_api.route('Web_admin/medical_store_page/<int:medical_store_id>', methods=['GET'])
+@medical_store_api.route('/web_app/Web_admin/medical_store_page/<int:medical_store_id>', methods=['GET'])
 def get_detail_contact_person_in_medical_store_by_medical_id_in_admin(medical_store_id):
     try:
         contact_person_detail = MedicalStoreModel.load_detail_contact_person_in_medical_store_by_medical_id_in_admin(medical_store_id)

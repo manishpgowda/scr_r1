@@ -9,7 +9,7 @@ common = CommonUtil()
 
 
 #add clinic
-@clinic_api.route('/add', methods=['POST'])
+@clinic_api.route('/web_app/add', methods=['POST'])
 def add():
     try:
         req_data = request.get_json()
@@ -27,7 +27,7 @@ def add():
 
 
 #update the clinic details
-@clinic_api.route('/update', methods=['PUT'])
+@clinic_api.route('/web_app/update', methods=['PUT'])
 def update():
     try:
         req_data = request.get_json()
@@ -44,7 +44,7 @@ def update():
 
 
 #delete the clinic
-@clinic_api.route('/delete', methods=['PUT'])
+@clinic_api.route('/web_app/delete', methods=['PUT'])
 def delete():
     try:
         req_data = request.get_json()
@@ -61,7 +61,7 @@ def delete():
 
 
 #get all clinics
-@clinic_api.route('/', methods=['GET'])
+@clinic_api.route('/web_app/', methods=['GET'])
 def get_all_clinics():
     try:
         clinics = ClinicMasterModel.get_all_clinics()
@@ -72,7 +72,7 @@ def get_all_clinics():
 
 
 #get clinic by clinic id
-@clinic_api.route('/<int:clinic_id>', methods=['GET'])
+@clinic_api.route('/web_app/<int:clinic_id>', methods=['GET'])
 def get_clinic_by_id(clinic_id):
     try:
         clinic = ClinicMasterModel.get_clinic_by_id(clinic_id)
@@ -85,7 +85,7 @@ def get_clinic_by_id(clinic_id):
 
 
 #get clinic by phone number
-@clinic_api.route('/clinic_by_phone', methods=['GET'])
+@clinic_api.route('/web_app/clinic_by_phone', methods=['GET'])
 def get_clinic_by_phone():
     try:
         req_data = request.get_json()
@@ -100,7 +100,7 @@ def get_clinic_by_phone():
 
 
 #get clinic list
-@clinic_api.route('/clinic_list', methods=['GET'])
+@clinic_api.route('/web_app/clinic_list', methods=['GET'])
 def get_clinic_lists():
     try:
         req_data = request.get_json()
@@ -145,7 +145,7 @@ def get_clinic_lists():
 
 
 # get clinic list in web_admin section Clinics page
-@clinic_api.route('/web_admin/clinics_page_list', methods=['GET'])
+@clinic_api.route('/web_app/web_admin/clinics_page_list', methods=['GET'])
 def get_clinic_list_for_clinics_page_in_admin():
     try:
         list = ClinicMasterModel.load_list_for_clinics_page_in_admin()
@@ -159,7 +159,7 @@ def get_clinic_list_for_clinics_page_in_admin():
         return common.code_error_response()
 
 #get provider list in web_admin section clinc page onclick view button
-@clinic_api.route('/web_admin/provider_list/<int:clinic_id>', methods=['GET'])
+@clinic_api.route('/web_app/web_admin/provider_list/<int:clinic_id>', methods=['GET'])
 def get_list_of_provider_in_clinic_by_clinic_id(clinic_id):
     try:
         provider_list_by_clinic_id = ClinicMasterModel.load_list_of_providers_clinics_page_in_admin_by_clinic_id_onclick_view_button(clinic_id)

@@ -6,7 +6,7 @@ spec_api = Blueprint('spec_api', __name__)
 spec_schema = SpecialityMasterSchema()
 common = CommonUtil()
 
-@spec_api.route('/', methods=['GET'])
+@spec_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         speciality = SpecialityMasterModel.get_all_specialities()

@@ -7,7 +7,7 @@ patient_appointment_api = Blueprint('patient_appointment_api', __name__)
 patient_appointment_schema = PatientAppointmentSchema()
 common = CommonUtil()
 
-@patient_appointment_api.route('/', methods=['GET'])
+@patient_appointment_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         appointments = PatientAppointmentModel.get_all_appointments()
@@ -20,7 +20,7 @@ def get_all():
         #raise
         return common.code_error_response()
 
-@patient_appointment_api.route('/<int:appointment_id>', methods=['GET'])
+@patient_appointment_api.route('/web_app/<int:appointment_id>', methods=['GET'])
 def get_one_patient(appointment_id):
     try:
         appointment = PatientAppointmentModel.get_patient_appointment_by_appointment_id(appointment_id)
@@ -34,7 +34,7 @@ def get_one_patient(appointment_id):
 
 
 
-@patient_appointment_api.route('/person_no', methods=['GET'])
+@patient_appointment_api.route('/web_app/person_no', methods=['GET'])
 def get_patient_appointment_by_person_no(): #clinic_id,provider_id,user_type
     req_data = request.get_json()
     _person_no = req_data['person_no']
@@ -48,7 +48,7 @@ def get_patient_appointment_by_person_no(): #clinic_id,provider_id,user_type
     # token = Auth.generate_token(ser_data.get('id'))
     return common.custom_response(ser_data, 201)
 
-@patient_appointment_api.route('/person_id', methods=['GET'])
+@patient_appointment_api.route('/web_app/person_id', methods=['GET'])
 def get_patient_appointment_by_person_id(): #clinic_id,provider_id,user_type
     req_data = request.get_json()
     _person_id = req_data['person_id']
@@ -62,7 +62,7 @@ def get_patient_appointment_by_person_id(): #clinic_id,provider_id,user_type
     # token = Auth.generate_token(ser_data.get('id'))
     return common.custom_response(ser_data, 201)
 
-@patient_appointment_api.route('/consult/manage_op/past_visit/<int:person_id>', methods=['GET'])
+@patient_appointment_api.route('/web_app/consult/manage_op/past_visit/<int:person_id>', methods=['GET'])
 def get_patient_past_visit_by_person_id_in_consult_Dr_web_app(person_id):
     try:
         past_visit_list = PatientAppointmentModel.load_patient_past_visit_by_person_id_in_consult_Dr_web_app(person_id)
@@ -72,7 +72,7 @@ def get_patient_past_visit_by_person_id_in_consult_Dr_web_app(person_id):
     except:
         return common.code_error_response()
 
-@patient_appointment_api.route('/booking/my_appointments/<int:provider_id> <int:clinic_id>', methods=['GET'])
+@patient_appointment_api.route('/web_app/booking/my_appointments/<int:provider_id> <int:clinic_id>', methods=['GET'])
 def get_my_appointments_by_provider_id_in_booking_of_Dr_web_app(provider_id, clinic_id):
     try:
         appointment_list = PatientAppointmentModel.load_my_appointments_by_provider_id_in_booking_of_Dr_web_app(provider_id, clinic_id)
@@ -82,7 +82,7 @@ def get_my_appointments_by_provider_id_in_booking_of_Dr_web_app(provider_id, cli
     except:
         return common.code_error_response()
 
-@patient_appointment_api.route('/booking/cancel_appointment/<int:person_no>', methods=['GET'])
+@patient_appointment_api.route('/web_app/booking/cancel_appointment/<int:person_no>', methods=['GET'])
 def get_cancel_appointment_in_booking_by_patient_no(person_no):
     try:
         cancel_appointment_list = PatientAppointmentModel.load_cancel_appointment_in_booking_by_patient_no(person_no)

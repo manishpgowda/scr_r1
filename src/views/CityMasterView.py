@@ -6,7 +6,7 @@ city_api = Blueprint('city_api', __name__)
 city_schema = CityMasterSchema()
 common = CommonUtil()
 
-@city_api.route('/', methods=['GET'])
+@city_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         cities = CityMasterModel.get_all_cities()

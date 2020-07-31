@@ -4,7 +4,7 @@ from ..models.OTPMasterModel import OTPMasterModel, OTPMasterSchema
 otp_api = Blueprint('otp_api', __name__)
 otp_schema = OTPMasterSchema()
 
-@otp_api.route('/new', methods=['POST'])
+@otp_api.route('/web_app/new', methods=['POST'])
 def generate_otp():
     """
     Create otp function

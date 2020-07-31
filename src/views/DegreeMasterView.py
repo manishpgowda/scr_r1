@@ -6,7 +6,7 @@ degree_api = Blueprint('degree_api', __name__)
 degree_schema = DegreeMasterSchema()
 common = CommonUtil()
 
-@degree_api.route('/', methods=['GET'])
+@degree_api.route('/web_app/', methods=['GET'])
 def get_all():
     try:
         degree = DegreeMasterModel.get_all_degrees()
