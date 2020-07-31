@@ -18,16 +18,9 @@ def add():
         if provider_in_db:
             message = {'error': 'Provider already exist, please check the phone number or enter a new one'}
             return common.info_request_response(message)
-
-        provider_in_db = ProviderMasterModel.get_provider_by_phone(data.get('phone_no'))
-        if provider_in_db:
-            message = {'error': 'Provider already exist, please check the phone number or enter a new one'}
-            return common.info_request_response(message)
         provider = ProviderMasterModel(data)
-        provider.user_name = provider.email_id
         provider.save()
-        ser_prov = provider_schema.dump(provider)
-        return common.custom_response(ser_prov, 201)
+        return common.custom_response({'info':'provider added successfully'}, 201)
     except:
         return common.code_error_response()
 
@@ -263,9 +256,10 @@ def get_follow_up_patients_by_provider_id(provider_id):
 def get_provider_list_web_admin_provider_page():
     try:
         provider_list_web_admin = ProviderMasterModel.load_provider_list_in_web_admin_provider_section()
-        final_out = common.convert_result_to_dict(provider_list_web_admin)
-        app_in_json = jsonify(final_out)
-        return common.custom_json_response(app_in_json, 200)
+        if provider_list_web_admin:
+            final_out = common.convert_result_to_dict(provider_list_web_admin)
+            app_in_json = jsonify(final_out)
+            return common.custom_json_response(app_in_json, 200)
     except:
         raise
         # return common.code_error_response()
