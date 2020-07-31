@@ -70,7 +70,7 @@ def get_all():
     except:
         return common.code_error_response()
 
-@patient_api.route('/web_app/<int:person_id>', methods=['GET'])
+@patient_api.route('/web_app/individual_patient/<int:person_id>', methods=['GET'])
 def get_one_patient(person_id):
     try:
         patient = PatientMasterModel.get_patient_by_id(person_id)
