@@ -216,16 +216,17 @@ def get_provider_by_clinic():
         raise
         # return common.code_error_response()
 
-@provider_api.route('/web_app/book_appointment/provider_list/<int:clinic_id>', methods=['GET'])
+@provider_api.route('/web_app/provider_list/<int:clinic_id>', methods=['GET'])
 def get_provider_list_in_book_new_appointment(clinic_id):
     try:
         provider_list_BA = ProviderMasterModel.load_provider_list_in_book_new_appointment(clinic_id)
-        final_out = common.convert_result_to_dict(provider_list_BA)
-        app_in_json = jsonify(final_out)
-        return common.custom_json_response(app_in_json, 200)
+        if provider_list_BA:
+            final_out = common.convert_result_to_dict(provider_list_BA)
+            app_in_json = jsonify(final_out)
+            return common.custom_json_response(app_in_json, 200)
     except:
-        raise
-        # return common.code_error_response()
+        # raise
+        return common.code_error_response()
 
 
 @provider_api.route('/web_app/bookmarked_patients/<int:provider_id>', methods=['GET'])

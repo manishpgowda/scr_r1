@@ -155,7 +155,7 @@ def get_clinic_list_for_clinics_page_in_admin():
             # return common.custom_response(app_in_json, 200)
             return common.custom_json_response(app_in_json, 200)
     except:
-        raise
+        # raise
         return common.code_error_response()
 
 #get provider list in web_admin section clinc page onclick view button
@@ -168,8 +168,7 @@ def get_list_of_provider_in_clinic_by_clinic_id(clinic_id):
             return common.custom_response(message, 404)
         final_out = common.convert_result_to_dict(provider_list_by_clinic_id)
         app_in_json = jsonify(final_out)
-        # return common.custom_response(app_in_json, 200)
         return common.custom_json_response(app_in_json, 200)
     except:
-        raise
+        # raise
         return common.code_error_response()
