@@ -187,8 +187,8 @@ def get_providers_by_speciality():
         #raise
         return common.code_error_response()
 
-@provider_api.route('/web_app/provider_by_clinic', methods=['GET'])
-def get_provider_by_clinic():
+@provider_api.route('/web_app/provider_by_clinic/<int:clinic_id>', methods=['GET'])
+def get_provider_by_clinic(_clinic_id):
     try:
         req_data = request.get_json()
         arg_list = None
