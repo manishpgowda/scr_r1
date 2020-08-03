@@ -114,9 +114,9 @@ class ClinicMasterModel(db.Model):
         return dbobj.execute_custom_function(fun_call)
 
     @staticmethod
-    def load_list_of_providers_clinics_page_in_admin_by_clinic_id_onclick_view_button(_clinic_id):
+    def load_list_of_providers_clinics_page_in_admin_by_clinic_id_onclick_view_button(clinic_id):
         dbobj = DBUtil()
-        fun_call = "SELECT * FROM scs.get_provider_list_in_web_admin_provider_section({0})".format(_clinic_id)
+        fun_call = "SELECT * FROM get_list_of_providers_clinics_page_in_admin_by_clinic_id_onclic({0})".format(clinic_id)
         return dbobj.execute_custom_function(fun_call)
 
     def __repr(self):

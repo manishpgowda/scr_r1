@@ -106,7 +106,6 @@ def get_provider_by_speciality():
     try:
         req_data = request.get_json()
         _speciality_name = req_data['speciality']
-        print(_speciality_name)
         # # check if user already exist in the db
         providers = ProviderMasterModel.get_provider_by_speciality(_speciality_name)
         if not providers:

@@ -163,12 +163,12 @@ def get_clinic_list_for_clinics_page_in_admin():
 def get_list_of_provider_in_clinic_by_clinic_id(clinic_id):
     try:
         provider_list_by_clinic_id = ClinicMasterModel.load_list_of_providers_clinics_page_in_admin_by_clinic_id_onclick_view_button(clinic_id)
-        if provider_list_by_clinic_id:
-            message = {'error': 'provider does not exist in clinic'}
-            return common.custom_response(message, 404)
+        # if not provider_list_by_clinic_id:
+        #     message = {'error': 'provider does not exist in clinic'}
+        #     return common.custom_response(message, 404)
         final_out = common.convert_result_to_dict(provider_list_by_clinic_id)
         app_in_json = jsonify(final_out)
         return common.custom_json_response(app_in_json, 200)
     except:
-        # raise
-        return common.code_error_response()
+        raise
+        # return common.code_error_response()
