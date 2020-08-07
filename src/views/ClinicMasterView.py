@@ -152,7 +152,6 @@ def get_clinic_list_for_clinics_page_in_admin():
         if list:
             final_out = common.convert_result_to_dict(list)
             app_in_json = jsonify(final_out)
-            # return common.custom_response(app_in_json, 200)
             return common.custom_json_response(app_in_json, 200)
     except:
         # raise

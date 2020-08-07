@@ -127,6 +127,12 @@ class PatientAppointmentModel(db.Model):
         fun_call = "SELECT * FROM scs.get_cancel_appointment_in_booking_by_patient_no('{0}')".format(_person_no)
         return dbobj.execute_custom_function(fun_call)
 
+    @staticmethod
+    def load_provider_list_in_book_new_appointmnet(clinic_id):
+        dbobj = DBUtil()
+        fun_call = "SELECT * FROM scs.get_provider_list_in_book_new_appointment('{0}')".format(clinic_id)
+        return dbobj.execute_custom_function(fun_call)
+
     def __repr(self):
         return '<appointment_id {}>'.format(self.appointment_id)
 

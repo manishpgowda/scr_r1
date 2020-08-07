@@ -91,3 +91,15 @@ def get_cancel_appointment_in_booking_by_patient_no(person_no):
         return common.custom_json_response(app_in_json, 200)
     except:
         return common.code_error_response()
+
+
+@patient_appointment_api.route('/web_app/booking/book_new_appointment/<int:clinic_id>', methods=['GET'])
+def get_provider_list_in_book_new_appointment(clinic_id):
+    try:
+        provider_List_in_book_new_appointment = PatientAppointmentModel.load_provider_list_in_book_new_appointmnet(clinic_id)
+        final_out = common.convert_result_to_dict(provider_List_in_book_new_appointment)
+        app_in_json = jsonify(final_out)
+        return common.custom_json_response(app_in_json, 200)
+    except:
+        raise
+        # return common.code_error_response()
