@@ -171,3 +171,46 @@ def get_list_of_provider_in_clinic_by_clinic_id(clinic_id):
     except:
         raise
         # return common.code_error_response()
+
+#providers in clinic with speciality in front desk home page
+@clinic_api.route('/providers_in_clinic', methods=['GET'])
+def get_providers_in_clinic():
+    try:
+        req_data = request.get_json()
+        arg_list = None
+        if not req_data:
+            message = {'error': 'parameter args missing in the request'}
+            return common.bad_request_response(message, 404)
+        else:
+            arg_list = req_data  # json.loads(req_data)
+
+        if 'clinic_id' in arg_list:
+            _clinic_id = req_data['clinic_id']
+        else:
+            _clinic_id = 0
+
+        if 'date_pref' in arg_list:
+            _date_pref = req_data['date_pref']
+        else:
+            _date_pref = ''
+
+        if 'page_no' in arg_list:
+            _page_no = req_data['page_no']
+        else:
+            _page_no = 0
+
+        if _clinic_id == 0:
+            message = {'error': 'clinic_id args missing in the request call'}
+            return common.bad_request_response(message, 400)
+
+        clinics = ClinicMasterModel.get_providers_by_speciality_in_cinic(_clinic_id, _date_pref, _page_no)
+        if not clinics:
+            message = {'error': 'clinics does not exist '}
+            return common.info_request_response(message, 404)
+        final_out = common.convert_result_to_dict(clinics)
+        clinic_in_json = jsonify(final_out)
+        # return common.custom_json_response(app_in_json, 200)
+        return common.custom_json_response(clinic_in_json, 200)
+    except:
+        #raise
+        return common.code_error_response()

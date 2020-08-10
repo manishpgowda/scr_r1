@@ -22,7 +22,8 @@ def add():
         provider.save()
         return common.custom_response({'info':'provider added successfully'}, 201)
     except:
-        return common.code_error_response()
+        raise
+        # return common.code_error_response()
 
 
 #update a provider
@@ -107,15 +108,15 @@ def get_provider_by_speciality():
         req_data = request.get_json()
         _speciality_name = req_data['speciality']
         # # check if user already exist in the db
-        providers = ProviderMasterModel.get_provider_by_speciality(_speciality_name)
+        providers = ProviderMasterModel.get_provider_by_speciality_in_clinics_by_clinic_id(_speciality_name)
         if not providers:
             message = {'error': 'providers does not exist for the speciality entered'}
             return common.info_request_response(message)
         ser_data = provider_schema.dump(providers,many=True)
         return common.custom_response(ser_data, 200)
     except:
-        #raise
-        return common.code_error_response()
+        raise
+        # return common.code_error_response()
 
 
 #get provider by speciality using function
