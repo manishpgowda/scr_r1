@@ -72,20 +72,59 @@ def get_patient_past_visit_by_person_id_in_consult_Dr_web_app(person_id):
     except:
         return common.code_error_response()
 
-@patient_appointment_api.route('/web_app/booking/my_appointments/<int:provider_id> <int:clinic_id>', methods=['GET'])
-def get_my_appointments_by_provider_id_in_booking_of_Dr_web_app(provider_id, clinic_id):
+@patient_appointment_api.route('/web_app/booking/my_appointments/', methods=['GET'])
+def get_my_appointments_by_provider_id_in_booking_of_Dr_web_app(_provider_id, _clinic_id, _date_pref):
     try:
-        appointment_list = PatientAppointmentModel.load_my_appointments_by_provider_id_in_booking_of_Dr_web_app(provider_id, clinic_id)
+        req_data = request.get_json()
+        arg_list = None
+        if not req_data:
+            message = {'error': 'parameter args missing in the request'}
+            return common.bad_request_response(message, 404)
+        else:
+            arg_list = req_data  # json.loads(req_data)
+
+        if 'provider_id' in arg_list:
+            _provider_id = req_data['provider_id']
+        else:
+            _provider_id = 0
+
+        if 'clinic_id' in arg_list:
+            _clinic_id = req_data['clinic_id']
+        else:
+            _clinic_id = 0
+
+        if 'date_pref' in arg_list:
+            _date_pref = req_data['date_pref']
+        else:
+            _date_pref = ''
+
+        appointment_list = PatientAppointmentModel.load_my_appointments_by_provider_id_in_booking_of_Dr_web_app(_provider_id, _clinic_id, _date_pref)
+        if not appointment_list:
+            message = {'error': 'appointment_list does not exist '}
+            return common.info_request_response(message, 404)
         final_out = common.convert_result_to_dict(appointment_list)
         app_in_json = jsonify(final_out)
         return common.custom_json_response(app_in_json, 200)
     except:
-        return common.code_error_response()
+        raise
+        # return common.code_error_response()
 
-@patient_appointment_api.route('/web_app/booking/cancel_appointment/<int:person_no>', methods=['GET'])
-def get_cancel_appointment_in_booking_by_patient_no(person_no):
+@patient_appointment_api.route('/web_app/booking/cancel_appointment/', methods=['GET'])
+def get_cancel_appointment_in_booking_by_patient_no(_person_no):
     try:
-        cancel_appointment_list = PatientAppointmentModel.load_cancel_appointment_in_booking_by_patient_no(person_no)
+        req_data = request.get_json()
+        arg_list = None
+        if not req_data:
+            message = {'error': 'parameter args missing in the request'}
+            return common.bad_request_response(message, 404)
+        else:
+            arg_list = req_data  # json.loads(req_data)
+
+        if 'person_no' in arg_list:
+            _person_no = req_data['person_no']
+        else:
+            _person_no = ''
+        cancel_appointment_list = PatientAppointmentModel.load_cancel_appointment_in_booking_by_patient_no(_person_no)
         final_out = common.convert_result_to_dict(cancel_appointment_list)
         app_in_json = jsonify(final_out)
         return common.custom_json_response(app_in_json, 200)

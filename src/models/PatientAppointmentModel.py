@@ -116,9 +116,9 @@ class PatientAppointmentModel(db.Model):
         return dbobj.execute_custom_function(fun_call)
 
     @staticmethod
-    def load_my_appointments_by_provider_id_in_booking_of_Dr_web_app(_provider_id,_clinic_id,_date_):
+    def load_my_appointments_by_provider_id_in_booking_of_Dr_web_app(_provider_id, _clinic_id, _date_pref):
         dbobj = DBUtil()
-        fun_call = "SELECT * FROM scs.get_my_appointments_by_provider_id_in_booking_of_Dr_web_app({0},{1},'{2}')".format(_provider_id,_clinic_id,_date_)
+        fun_call = "SELECT * FROM scs.get_my_appointments_by_provider_id_in_booking_of_Dr_web_app({0},{1},'{2}')".format(_provider_id, _clinic_id, _date_pref)
         return dbobj.execute_custom_function(fun_call)
 
     @staticmethod
