@@ -173,7 +173,7 @@ def get_list_of_provider_in_clinic_by_clinic_id(clinic_id):
         # return common.code_error_response()
 
 #providers in clinic with speciality in front desk home page
-@clinic_api.route('/providers_in_clinic', methods=['GET'])
+@clinic_api.route('/front_desk_home_page/web_app/providers_in_clinic', methods=['GET'])
 def get_providers_in_clinic():
     try:
         req_data = request.get_json()
