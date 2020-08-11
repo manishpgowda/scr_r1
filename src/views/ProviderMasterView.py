@@ -264,3 +264,43 @@ def get_provider_list_web_admin_provider_page():
     except:
         raise
         # return common.code_error_response()
+
+
+#provider directory
+@provider_api.route('/web_app/provider_dir', methods=['GET'])
+def get_provider_directory():
+    try:
+        req_data = request.get_json()
+        arg_list = None
+        if not req_data:
+            message = {'error': 'parameter args missing in the request'}
+            return common.bad_request_response(message, 404)
+        else:
+            arg_list = req_data  # json.loads(req_data)
+
+        if 'clinic_name' in arg_list:
+            _clinic_name = req_data['clinic_name']
+        else:
+            _clinic_name = 0
+
+        if 'location_lat' in arg_list:
+            _location_lat = req_data['location_lat']
+        else:
+            _location_lat = ''
+
+        if 'location_lon' in arg_list:
+            _location_lon = req_data['location_lon']
+        else:
+            _location_lon = 0
+
+        providers = ProviderMasterModel.load_provider_directory(_clinic_name, _location_lat, _location_lon)
+        if not providers:
+            message = {'error': 'provider does not exist '}
+            return common.info_request_response(message, 404)
+        final_out = common.convert_result_to_dict(providers)
+        providers_in_json = jsonify(final_out)
+        # return common.custom_json_response(app_in_json, 200)
+        return common.custom_json_response(providers_in_json, 200)
+    except:
+        #raise
+        return common.code_error_response()

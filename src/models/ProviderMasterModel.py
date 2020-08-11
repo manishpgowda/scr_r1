@@ -153,6 +153,12 @@ class ProviderMasterModel(db.Model):
         fun_call = "SELECT * FROM scs.get_provider_list_in_web_admin_provider_section()".format()
         return dbobj.execute_custom_function(fun_call)
 
+    @staticmethod
+    def load_provider_directory(_clinic_name, _location_lat, _location_lon):
+        dbobj = DBUtil()
+        fun_call = "SELECT * FROM scs.get_provider_directory('{0}','{1}','{2}')".format(_clinic_name, _location_lat, _location_lon)
+        return dbobj.execute_custom_function(fun_call)
+
     def __repr(self):
         return '<provider_id {}>'.format(self.provider_id)
 
