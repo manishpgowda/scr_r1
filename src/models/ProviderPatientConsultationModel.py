@@ -87,6 +87,13 @@ class ProviderPatientConsultationModel(db.Model):
         return dbobj.execute_custom_function(fun_call)
 
     @staticmethod
+    def load_appointment_report_by_date_range(_clinic_id, _provider_id, _date_from, _date_to):
+        dbobj = DBUtil()
+        fun_call = "SELECT * FROM scs.get_appointment_report_by_date_range({0},{1},'{2}','{3}')".format(_clinic_id, _provider_id, _date_from, _date_to)
+        return dbobj.execute_custom_function(fun_call)
+
+
+    @staticmethod
     def __repr(self):
         return '<speciality_id {}>'.format(self.speciality_id)
 
