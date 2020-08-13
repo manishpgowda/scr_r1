@@ -158,4 +158,3 @@ def get_detail_contact_person_in_medical_store_by_medical_id_in_admin(medical_st
     except:
         return common.code_error_response()
 
-

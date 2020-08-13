@@ -108,6 +108,7 @@ class MedicalStoreModel(db.Model):
             _medical_store_id)
         return dbobj.execute_custom_function(fun_call)
 
+
     def __repr(self):
         return '<medical_store_id {}>'.format(self.medical_store_id)
 
