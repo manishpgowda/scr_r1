@@ -1,5 +1,7 @@
 from marshmallow import fields, Schema
 import datetime
+
+from ..shared.DBUtil import DBUtil
 from . import db
 
 #clinic_provider_mapping
@@ -56,6 +58,12 @@ class ClinicProviderMappingModel(db.Model):
     @staticmethod
     def get_all_mappings():
         return ClinicProviderMappingModel.query.all()
+
+    @staticmethod
+    def load_provider_list_in_book_new_appointmnet(_clinic_id, _date_pref):
+        dbobj = DBUtil()
+        fun_call = "SELECT * FROM scs.get_provider_list_in_book_new_appointment({0},'{1}')".format(_clinic_id, _date_pref)
+        return dbobj.execute_custom_function(fun_call)
 
 class ClinicProviderMappingSchema(Schema):
     clinic_id = fields.Integer(required=False, missing=True)

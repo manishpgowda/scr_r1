@@ -14,6 +14,7 @@ from .views.ProviderPatientConsultationView import provider_consultation_api as 
 from .views.MedicalStoreView import medical_store_api as medical_store_blureprint
 from .views.PatientAppointmentView import patient_appointment_api as patient_appoitnment_blueprint
 from .views.ProviderMedicalConnectView import provider_medical_connect_api as provider_medical_connect_blueprint
+from .views.ClinicProviderMappingView import clinic_provider_mapping_api as clinic_provider_mapping_api_blueprint
 
 
 def create_app(env_name):
@@ -39,6 +40,7 @@ def create_app(env_name):
     app.register_blueprint(clinic_op_blueprint, url_prefix='/api/v1/Clinic_op')  # add this line
     app.register_blueprint(medical_store_blureprint, url_prefix='/api/v1/Medical_store')  # add this line
     app.register_blueprint(provider_medical_connect_blueprint, url_prefix='/api/v1/Provider_Medical_Connect')
+    app.register_blueprint(clinic_provider_mapping_api_blueprint, url_prefix='/api/v1/Clinic_Provider_Mapping')
 
     @app.route('/', methods=['GET'])
     def index():
